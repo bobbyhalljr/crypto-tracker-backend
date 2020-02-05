@@ -7,14 +7,15 @@ const resolvers = require('./graphql/resolvers')
 
 dotenv.config()
 
-// const pubsub = new Pubsub();
+// const pubsub = new Pubsub()
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => ({ req, pubsub })
+    context: ({ req }) => ({ req,  })
 })
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true,})
+.then(() => {
     return server.listen({ port: process.env.PORT || 4000 }).then(res => {
       console.log(`Server running at ${res.url}`);
     });
