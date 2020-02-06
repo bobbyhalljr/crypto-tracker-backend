@@ -1,4 +1,4 @@
-const { ApolloServer, Pubsub } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const { mongoURI } = require('./config/keys');
