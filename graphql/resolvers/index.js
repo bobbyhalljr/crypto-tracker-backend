@@ -1,10 +1,13 @@
 const userResolvers = require('./users');
+const coinResolvers = require('./coins');
 
 module.exports = {
     Query: {
-        ...userResolvers.Query
+        ...userResolvers.Query,
+        ...coinResolvers.Query,
     },
     Mutation: {
-        ...userResolvers.Mutation
+        ...userResolvers.Mutation,
+        ...coinResolvers.Mutation,
     }
 }

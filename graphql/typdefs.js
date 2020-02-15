@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server');
 
 module.exports = gql`
+
 type User {
     id: ID!
     username: String!
@@ -9,6 +10,8 @@ type User {
     createdAt: String!
     token: String!
     email: String!
+    favorites: [Favorite]!
+    subChats: [Chat]!
 }
 
 input RegisterInput {
@@ -18,13 +21,20 @@ input RegisterInput {
 }
 
 type Coin {
-    id: ID!
+    id: String!
     name: String!
     symbol: String!
     price: Float!
     likes: Int!
-    favorites: [Favorite] 
+    comments: [Comment]
     chats: [Chat]
+}
+
+type Comment {
+    id: ID!
+    username: User!
+    createdAt: String!
+    body: String!
 }
 
 type Favorite {
@@ -36,7 +46,7 @@ type Favorite {
 
 type Chat {
     id: ID!
-    message: String
+    message: String!
     sender: User!
     reciever: User!
     createdAt: String!
@@ -49,11 +59,16 @@ type subscription {
 type Query {
     users: [User]!
     coins: Coin!
+    getFavorites: [Favorite]!
+    getComments: [Comment]!
 }
 
 type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
-
+    likeCoin(coinId: ID!): Coin!
+    favoriteCoin(coinId: ID!): Coin!
+    createComment(coinId: ID!, body: String!): Coin!
+    deleteComment(coinID: ID!): Coin!
 }
 `;
